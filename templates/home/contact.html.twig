@@ -15,7 +15,6 @@
 {% block stylesheets %}
     <link rel="shortcut icon" href="assets/img/ico/fav.png">
 
-    
     <link href="/assets/css/main.css" rel="stylesheet">
 
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.materialize.a1042cadda540464eafd9350bb40433a_1547807689.css" rel="stylesheet">
@@ -58,29 +57,6 @@
     <script src="http://kys.idmkr.io/cache/assets/frontend.kys.revolution-ext-navigation.2ed69f3ed2a71a822ae8cb9db68f948b_1547807822.js"></script>
     <script src="http://kys.idmkr.io/cache/assets/frontend.kys.revolution-ext-migration.f05042883f3b2c4d6fdc843e9d033d3a_1547807821.js"></script>
     <script src="http://kys.idmkr.io/cache/assets/frontend.kys.revolution-ext-parallax.402830701f2cb1475353aa7335920e6b_1547807822.js"></script>
-
-    <style>
-        .page-title-bg {
-            background-image: url(../../assets/img/bg3.jpg);
-        }
-        .log-section form .checkbox label {
-            font-size: 16px
-        }
-        .log-section form .checkbox label a {
-            color: #b6a575;
-            text-decoration: underline;
-            text-transform: inherit;
-            font-size: 16px
-        }
-        .log-section form .links a {
-            display: block;
-            text-align: center;
-            color: #b6a575;
-            text-decoration: underline;
-            text-transform: inherit;
-            font-size: 16px
-        }
-    </style>
 {% endblock %}
 
 {% block body %}
@@ -94,91 +70,107 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="white-text">Register</h2>
-                        <span class="white-text">Welcome on board</span>
+                        <h2 class="white-text">Feel free to contact us</h2>
+                        <span class="white-text">for any questions or demands</span>
                         <ol class="breadcrumb">
                             <li><a href="#!">Home</a></li>
-                            <li class="active">Register</li>
+                            <li class="active">Contact</li>
                         </ol>
                     </div>
                 </div>
             </div>
         </section>
 
-
         <!-- Page Content-->
-        <section class="section-padding gray-bg log-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 card card-panel">
-                        <h3 class="text-extrabold">Create a new account</h3>
-                        <form id="register-form" role="form" method="post" accept-char="UTF-8" autocomplete="off" data-parsley-validate>
-
-                            <input type="hidden" name="_token" value="">
-
-                            <div class="input-field">
-                                <input type="email" name="email" id="email" value=""
-                                       required
-                                       data-parsley-trigger="change"
-                                       data-parsley-error-message="A valid email address is required.">
-                                <label for="email">Email</label>
-                                <span class="help-block">Type your email address.</span>
-                            </div>
-                            <div class="input-field">
-                                <input type="password" name="password" id="password" value=""
-                                       required
-                                       data-parsley-trigger="change"
-                                       data-parsley-minlength="6"
-                                       data-parsley-error-message="The password must be at least 6 characters.">
-                                <label for="password">Password</label>
-                                <i class="fa fa-eye show-password"></i>
-                                <span class="help-block">Type your password.</span>
-                            </div>
-                            <div class="input-field">
-                                <input type="password" name="password_confirmation" id="password_confirmation" value=""
-                                       required
-                                       data-parsley-trigger="change"
-                                       data-parsley-equalto="#password"
-                                       data-parsley-error-message="Password does not match.">
-                                <label for="password_confirmation">Confirm Password</label>
-                                <i class="fa fa-eye show-password"></i>
-                                <span class="help-block">Confirm your password.</span>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" name="accept-terms" value="1" id="accept-terms" required/>
-                                <label for="accept-terms">I have read and I accept the <a href="#!" target="_blank">Terms Of Use</a></label>
-                            </div>
-
-                            <button type="submit" class="btn btn-lg gradient secondary btn-block waves-effect waves-light mt-20 mb-20">Create an account</button>
-                            <div class="links">
-                                <a href="/login.html">Already have an account? Click here</a>
-                            </div>
-                        </form>
+        <form method="POST" action="#!" accept-charset="UTF-8" id="formContact" class="light-gray-bg">
+            <input name="_token" type="hidden" value="">
+            <input name="job_id" type="hidden" value="">
+            <section class="section-padding">
+                <div class="container">
+                    <div class="text-center mb-80">
+                        <h2 class="section-title text-uppercase">Drop us a line</h2>
+                        <p class="section-sub text-center">Whether your needs, desires or wishes are urgent or a little less, they will all be taken care of with the some efficiency by us.</p>
                     </div>
 
+                    <div class="row">
+                        <div id="contactForm" class="col-xs-12 col-sm-12 col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <input required="required" name="firstname" type="text">
+                                        <label for="firstname">First name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <input required="required" name="lastname" type="text">
+                                        <label for="lastname">Last name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <input required="required" name="email" type="email">
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <input required="required" name="phone" type="tel">
+                                        <label for="phone">Phone Number</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-field">
+                                        <textarea class="materialize-textarea" required="required" name="message" cols="50" rows="10"></textarea>
+                                        <label for="message">Message</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                                    <button type="submit"
+                                            name="submit"
+                                            class="btn btn-block gradient primary waves-effect waves-light submit-button">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-4 contact-info mt-40">
+
+                            <address>
+                                <i class="material-icons brand-color">&#xE55F;</i>
+                                <div class="address">
+                                    <p>Luxury Services is based in Roanne, on Loire department</p>
+                                </div>
+                                <i class="material-icons brand-color">&#xE61C;</i>
+                                <div class="phone">
+                                    <p>+33 (0) 6 60 06 66 00</p>
+                                </div>
+                                <i class="material-icons brand-color">&#xE916;</i>
+                                <div class="phone">
+                                    <p>9 - 22h with 24/7 speaker</p>
+                                </div>
+                                <i class="material-icons brand-color">&#xE0E1;</i>
+                                <div class="mail">
+                                    <p><a href="#!">georges[a]luxuryservices.com</a></p>
+                                </div>
+                            </address>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </form>
+        <div id="myMap" class="height-350">Gmap here</div>
 
     </div>
 
 </div>
-
-
-
-    <h1>Register</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
 {% endblock %}
 
 {% block javascripts %}
