@@ -13,9 +13,9 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="shortcut icon" href="assets/img/ico/fav.png">
+    <link rel="shortcut icon" href="{{ asset('assets/img/ico/fav.png') }}">
 
-    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.materialize.a1042cadda540464eafd9350bb40433a_1547807689.css" rel="stylesheet">
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.bootstrap.457005dcd8ab887d5f47791eaa1e3a26_1547807834.css" rel="stylesheet">
@@ -73,7 +73,7 @@
                         <h2 class="white-text">Who We are</h2>
                         <span class="white-text">Discover our skills & attributes</span>
                         <ol class="breadcrumb">
-                            <li><a href="#!">Home</a></li>
+                            <li><a href="{{ path('app_home') }}">Home</a></li>
                             <li class="active">About us</li>
                         </ol>
                     </div>
@@ -129,7 +129,7 @@
                                 <h1 class="text-uppercase mb-30 text-extrabold font-30">We provide customized services on demand</h1>
                                 <p class="width-60 mb-30">You know that attracting and retaining top talent is vital for the success of your business. It’s that end result you’re focused on – hiring a great team – and not the process to get there. This is where we can help...</p>
 
-                                <a href="/contact.html" class="btn btn-lg border secondary waves-effect waves-light mt-20"><span><strong>Get in touch</strong> with us</span></a>
+                                <a href="{{ path('app_contact') }}" class="btn btn-lg border secondary waves-effect waves-light mt-20"><span><strong>Get in touch</strong> with us</span></a>
                             </div>
                         </div>
                     </div>
@@ -147,10 +147,10 @@
 
                             <div class="carousel-inner" role="listbox">
                                 <div class="item active">
-                                    <img class="img-responsive" src="../assets/img/slide1.jpg" alt="">
+                                    <img class="img-responsive" src="{{ asset('assets/img/slide1.jpg') }}" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="img-responsive" src="../assets/img/slide2.jpg" alt="">
+                                    <img class="img-responsive" src="{{ asset('assets/img/slide2.jpg') }}" alt="">
                                 </div>
                             </div>
 

@@ -13,9 +13,9 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="shortcut icon" href="assets/img/ico/fav.png">
+    <link rel="shortcut icon" href="{{ asset('assets/img/ico/fav.png') }}">
 
-    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.materialize.a1042cadda540464eafd9350bb40433a_1547807689.css" rel="stylesheet">
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.bootstrap.457005dcd8ab887d5f47791eaa1e3a26_1547807834.css" rel="stylesheet">
@@ -121,7 +121,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -236,7 +236,7 @@
                             <h3 class="c-secondary mb-30 no-margin">Sign-up and apply for jobs now</h3>
                             <p class="white-text section-sub">Each one of your skills is seen as precious resource to us, each one of your personality traits are considered as an added on value. Joining us is allowing our recruitment expertise and personal guidance to bring the best out in you by choosing the most suited position.</p>
 
-                            <a href="/register.html" class="btn border secondary waves-effect waves-light mt-40">Join us</a>
+                            <a href="{{ path('app_register') }}" class="btn border secondary waves-effect waves-light mt-40">Join us</a>
                         </div>
                     </div>
                 </div>

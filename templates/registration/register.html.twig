@@ -14,7 +14,6 @@
 
 {% block stylesheets %}
     <link rel="shortcut icon" href="assets/img/ico/fav.png">
-
     
     <link href="/assets/css/main.css" rel="stylesheet">
 
@@ -106,7 +105,7 @@
         </section>
 
 
-        <!-- Page Content-->
+        {# <!-- Page Content-->
         <section class="section-padding gray-bg log-section">
             <div class="container">
                 <div class="row">
@@ -158,6 +157,52 @@
 
                 </div>
             </div>
+        </section> #}
+
+        <!-- Page Content-->
+        <section class="section-padding gray-bg log-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 card card-panel">
+                        <h3 class="text-extrabold">Create a new account</h3>
+                        <form id="register-form" role="form" method="post" accept-char="UTF-8" autocomplete="off" data-parsley-validate>
+                        {{ form_errors(registrationForm) }}
+
+                            {{ form_start(registrationForm) }}
+
+                            <div class="input-field">
+                                {{ form_row(registrationForm.email) }}
+                                <span class="help-block">Type your email address.</span>
+                            </div>
+                            <div class="input-field">
+                                {{ form_row(registrationForm.password.first) }}
+                                <i class="fa fa-eye show-password"></i>
+                                <span class="help-block">Type your password.</span>
+                            </div>
+                            <div class="input-field">
+                                {{ form_row(registrationForm.password.second) }}
+                                <i class="fa fa-eye show-password"></i>
+                                <span class="help-block">Type your password.</span>
+                            </div>
+                            {# <div class="checkbox">
+                                {{ form_widget(registrationForm.agreeTerms) }}
+                                <label for="agreeTerms">I have read and I accept the <a href="#!" target="_blank">Terms Of Use</a></label>
+                            </div> #}
+                            {# <label>
+                                {{ form_widget(registrationForm.agreeTerms) }}
+                                <span>Masquer le montant de ma participation auprès des autres participants</span>
+                            </label> #}
+
+                            <button type="submit" class="btn btn-lg gradient secondary btn-block waves-effect waves-light mt-20 mb-20">Create an account</button>
+                            <div class="links">
+                                <a href="{{ path('app_login') }}">Already have an account? Click here</a>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                        </form>
+                    </div>
+
+                </div>
+            </div>
         </section>
 
     </div>
@@ -166,19 +211,20 @@
 
 
 
-    <h1>Register</h1>
+    {# <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+        {{ form_row(registrationForm.password, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_widget(registrationForm.agreeTerms) }}
+        {{ form_label(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
 {% endblock %}
 
 {% block javascripts %}

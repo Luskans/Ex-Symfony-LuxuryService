@@ -13,9 +13,9 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="shortcut icon" href="assets/img/luxury-services-logo.png">
+    <link rel="shortcut icon" href="{{ asset('assets/img/luxury-services-logo.png') }}">
 
-    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.materialize.a1042cadda540464eafd9350bb40433a_1547807689.css" rel="stylesheet">
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.bootstrap.457005dcd8ab887d5f47791eaa1e3a26_1547807834.css" rel="stylesheet">
@@ -78,7 +78,7 @@
                     <li data-transition="parallaxtoleft" data-slotamount="default"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off">
 
                         <!-- MAIN IMAGE -->
-                        <img src="assets/img/bg1.jpg"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <img src="{{ asset('assets/img/bg1.jpg') }}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
 
                         <!-- LAYER NR. 1 -->
                         <div class="tp-caption rev-heading tp-resizeme"
@@ -153,7 +153,7 @@
                     <li data-transition="parallaxtoleft" data-slotamount="default"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off">
 
                         <!-- MAIN IMAGE -->
-                        <img src="assets/img/bg3.jpg"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <img src="{{ asset('assets/img/bg3.jpg') }}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
 
                         <!-- LAYER NR. 1 -->
                         <div class="tp-caption rev-heading tp-resizeme"
@@ -244,7 +244,7 @@
                             <h3 class="white-text text-bold text-uppercase no-margin">WE HAVE THE SOLUTION FOR YOU</h3>
                         </div>
                         <div class="promo-btn">
-                            <a href="/templates/contact.html" class="btn border secondary waves-effect waves-light">Contact Us</a>
+                            <a href="{{ path('app_contact') }}" class="btn border secondary waves-effect waves-light">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -267,10 +267,10 @@
 
                             <div class="carousel-inner" role="listbox">
                                 <div class="item active">
-                                    <img class="img-responsive" src="assets/img/slide1.jpg" alt="">
+                                    <img class="img-responsive" src="{{ asset('assets/img/slide1.jpg') }}" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="img-responsive" src="assets/img/slide2.jpg" alt="">
+                                    <img class="img-responsive" src="{{ asset('assets/img/slide2.jpg') }}" alt="">
                                 </div>
                             </div>
 
@@ -290,7 +290,7 @@
                     </div>
 
                     <div class="text-center">
-                        <a href="/templates/company.html" class="btn gradient secondary waves-effect waves-light mt-40">More about us</a>
+                        <a href="{{ path('app_company') }}" class="btn gradient secondary waves-effect waves-light mt-40">More about us</a>
                     </div>
                 </div>
             </div>
@@ -315,7 +315,7 @@
                             <h3 class="c-secondary mb-30 no-margin">Sign-up and apply for jobs now</h3>
                             <p class="white-text section-sub">Each one of your skills is seen as precious resource to us, each one of your personality traits are considered as an added on value. Joining us is allowing our recruitment expertise and personal guidance to bring the best out in you by choosing the most suited position.</p>
 
-                            <a href="/templates/auth/register.html" class="btn border secondary waves-effect waves-light mt-40">Join us</a>
+                            <a href="{{ path('app_register') }}" class="btn border secondary waves-effect waves-light mt-40">Join us</a>
                         </div>
                     </div>
                 </div>
@@ -363,7 +363,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -391,7 +391,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -419,7 +419,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -447,7 +447,7 @@
                                         <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('app_offer_show') }}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
@@ -459,7 +459,7 @@
                     </div>
 
                     <div class="text-center">
-                        <a href="/templates/jobs/index.html" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
+                        <a href="{{ path('app_offer') }}" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
                     </div>
                 </div>
             </div>
