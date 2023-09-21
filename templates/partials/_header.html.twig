@@ -34,6 +34,39 @@
                     </div>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {% if (app.user) %}
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <ul class="menuzord-menu pull-right light" role="navigation">
+                            <li class=" dropdown">
+                                <a target="_self" href="{{ path('admin') }}" class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register">
+                                    <i class=""></i>
+                                    <span>Admin</span>
+                                </a>
+                            </li>
+                            <li class=" dropdown">
+                                <a target="_self" href="{{ path('app_logout') }}">
+                                    <i class=""></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul class="menuzord-menu pull-right light" role="navigation">
+                            <li class=" dropdown">
+                                <a target="_self" href="{{ path('app_candidate_edit', {'id': app.user.candidate.id}) }}" class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register">
+                                    <i class=""></i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li class=" dropdown">
+                                <a target="_self" href="{{ path('app_logout') }}">
+                                    <i class=""></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                {% else %}
                     <ul class="menuzord-menu pull-right light" role="navigation">
                         <li class=" dropdown">
                             <a target="_self" href="{{ path('app_login') }}">
@@ -47,6 +80,7 @@
 
                         </li>
                     </ul>
+                {% endif %}
                     <ul class="menuzord-menu pull-right light" role="navigation">
                         <li class="active dropdown">
                             <a target="_self" href="/">

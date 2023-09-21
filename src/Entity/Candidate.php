@@ -14,75 +14,78 @@ class Candidate
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $gender = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $adress = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $country = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $nationality = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $havePassport = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $passport = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $curriculum = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $location = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateOfBirth = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $placeOfBirth = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $isAvailable = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $sector = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $experience = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $note = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $file = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $id_user = null;
+    private ?User $user = null;
+
+    #[ORM\Column]
+    private ?bool $isDeleted = false;
 
     public function getId(): ?int
     {
@@ -121,6 +124,18 @@ class Candidate
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): static
+    {
+        $this->city = $city;
 
         return $this;
     }
@@ -205,18 +220,6 @@ class Candidate
     public function setPicture(string $picture): static
     {
         $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function getLocation(): ?string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(string $location): static
-    {
-        $this->location = $location;
 
         return $this;
     }
@@ -353,15 +356,28 @@ class Candidate
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getUser(): ?User
     {
-        return $this->id_user;
+        return $this->user;
     }
 
-    public function setIdUser(User $id_user): static
+    public function setUser(User $user): static
     {
-        $this->id_user = $id_user;
+        $this->user = $user;
 
         return $this;
     }
+
+    public function isIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): static
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+    
 }

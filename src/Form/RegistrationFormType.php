@@ -30,69 +30,11 @@ class RegistrationFormType extends AbstractType
                 ],
                 // 'help' => 'Type you email address.'
             ])
-            // ->add('plainPassword', PasswordType::class, [
-            //     // instead of being set onto the object directly,
-            //     // this is read and encoded in the controller
-            //     'mapped' => false,
-            //     'attr' => ['autocomplete' => 'new-password'],
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Please enter a password',
-            //         ]),
-            //         new Length([
-            //             'min' => 6,
-            //             'minMessage' => 'Your password should be at least {{ limit }} characters',
-            //             // max length allowed by Symfony for security reasons
-            //             'max' => 4096,
-            //         ]),
-            //     ],
-            // ])
-            // ->add('password', PasswordType::class, [
-            //     // instead of being set onto the object directly,
-            //     // this is read and encoded in the controller
-            //     'mapped' => false,
-            //     'attr' => [
-            //         'autocomplete' => 'new-password',
-            //         'id' => 'password'
-            //     ],
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Please enter a password',
-            //         ]),
-            //         new Length([
-            //             'min' => 6,
-            //             'minMessage' => 'Your password should be at least {{ limit }} characters',
-            //             // max length allowed by Symfony for security reasons
-            //             'max' => 4096,
-            //         ]),
-            //     ],
-            // ])
-            // ->add('password_confirmation', PasswordType::class, [
-            //     // instead of being set onto the object directly,
-            //     // this is read and encoded in the controller
-            //     'mapped' => false,
-            //     'attr' => [
-            //         // 'autocomplete' => 'new-password',
-            //         'id' => 'password_confirmation'
-            //     ],
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Please enter a password',
-            //         ]),
-            //         new Length([
-            //             'min' => 6,
-            //             'minMessage' => 'Your password should be at least {{ limit }} characters',
-            //             // max length allowed by Symfony for security reasons
-            //             'max' => 4096,
-            //         ]),
-            //     ],
-            // ])
             ->add('password', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'type' => PasswordType::class,
                 'mapped' => false,
-                
                 'options' => [
                     'attr' => [
                         // 'class' => 'password-field',
@@ -104,7 +46,6 @@ class RegistrationFormType extends AbstractType
                     ],
                     
                 ],
-                
                 'first_options'  => [
                     'label' => 'Password',
                     'attr' => [
@@ -130,21 +71,20 @@ class RegistrationFormType extends AbstractType
                     // 'invalid_message' => 'The password fields must match.',
                 ],
             ])
-
-            // ->add('agreeTerms', CheckboxType::class, [
-            //     'mapped' => false,
-            //     'constraints' => [
-            //         new IsTrue([
-            //             'message' => 'You should agree to our terms.',
-            //         ]),
-            //     ],
-            //     'attr' => [
-            //         'value' => '1',
-            //         'id' => 'agreeTerms',
-            //         'required' => true,
-            //     ],
-            //     // 'label' => 'I have read and I accept the <a href="#!" target="_blank">Terms Of Use</a>',
-            // ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
+                'attr' => [
+                    'value' => '1',
+                    'id' => 'agreeTerms',
+                    'required' => true,
+                ],
+                // 'label' => 'I have read and I accept the <a href="#!" target="_blank">Terms Of Use</a>',
+            ])
         ;
     }
 

@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,12 +35,15 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            $user->setCandidate(new Candidate());
+            $user->getCandidate()->setUser($user);
+            $user->getCandidate()->setCreatedAt(new DateTimeImmutable());
 
             $entityManager->persist($user);
             $entityManager->flush();
 
             // do anything else you need here, like send an email
-
+            
             $email = (new Email())
                 ->from('contact@luxury-services.com')
                 ->to($user->getEmail())
