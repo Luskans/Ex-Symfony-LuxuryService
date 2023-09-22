@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,7 +51,15 @@ class Offer
 
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Client $id_client = null;
+    private ?Client $client = null;
+
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Candidacy::class, orphanRemoval: true)]
+    private Collection $candidacies;
+
+    public function __construct()
+    {
+        $this->candidacies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -188,15 +198,47 @@ class Offer
         return $this;
     }
 
-    public function getIdClient(): ?Client
+    public function getClient(): ?Client
     {
-        return $this->id_client;
+        return $this->client;
     }
 
-    public function setIdClient(?Client $id_client): static
+    public function setClient(?Client $client): static
     {
-        $this->id_client = $id_client;
+        $this->client = $client;
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Candidacy>
+     */
+    public function getCandidacies(): Collection
+    {
+        return $this->candidacies;
+    }
+
+    public function addCandidacy(Candidacy $candidacy): static
+    {
+        if (!$this->candidacies->contains($candidacy)) {
+            $this->candidacies->add($candidacy);
+            $candidacy->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidacy(Candidacy $candidacy): static
+    {
+        if ($this->candidacies->removeElement($candidacy)) {
+            // set the owning side to null (unless already changed)
+            if ($candidacy->getOffer() === $this) {
+                $candidacy->setOffer(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

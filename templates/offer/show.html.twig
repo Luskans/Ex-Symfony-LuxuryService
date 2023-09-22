@@ -37,14 +37,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="white-text">2nd assistant position</h2>
-                        <span class="white-text">Ref. 1007</span>
+                        <h2 class="white-text">{{ offer.title }}</h2>
+                        <span class="white-text">Ref. {{ offer.reference }}</span>
                         <ol class="breadcrumb">
                             <li>
                                 <div class="portfolio-nav">
-                                    <a href="#!" class="waves-effect waves-dark"><i class="fa fa-angle-left" aria-hidden="true"></i> Prev</a>
-                                    <a href="#!" class="waves-effect waves-dark"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-                                    <a href="#!" class="waves-effect waves-dark">Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    {% if (offer.id == 1) %}
+                                    <a href="#" class="waves-effect waves-dark"><i class="fa fa-angle-left" aria-hidden="true"></i> Prev</a>
+                                    {% else %}
+                                    <a href="{{ path('app_offer_show', {'id': offer.id - 1}) }}" class="waves-effect waves-dark"><i class="fa fa-angle-left" aria-hidden="true"></i> Prev</a>
+                                    {% endif %}
+                                    <a href="{{ path('app_offer') }}" class="waves-effect waves-dark"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                                    {% if (offer.id == offers|length) %}
+                                    <a href="#" class="waves-effect waves-dark">Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    {% else %}
+                                    <a href="{{ path('app_offer_show', {'id': offer.id + 1}) }}" class="waves-effect waves-dark">Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    {% endif %}
                                 </div>
                             </li>
                         </ol>
@@ -59,20 +67,19 @@
                 <div class="project-overview">
                     <div class="row mb-80">
                         <div class="col-xs-12 col-md-8">
-                            <p class="ref grey-text no-margin">Ref. 1007</p>
-                            <h2>2nd assistant position</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tortor venenatis, consequat quam et, varius lorem. Vivamus auctor vehicula odio, non scelerisque nibh cursus maximus. Sed hendrerit eros libero, vel accumsan nisi sagittis sit amet. Vivamus vitae neque convallis, consectetur lectus ac, pellentesque massa. Morbi finibus faucibus lorem vel placerat. Vivamus neque ligula, lacinia ac arcu sed, egestas mattis felis. Pellentesque tincidunt nulla lorem, ut sollicitudin metus volutpat ut. Vivamus et dignissim elit. </p>
-                            <p>Vivamus id congue massa. Praesent ornare ipsum dolor, ut semper sapien tempus non. Integer eget dui vehicula nisi rutrum interdum et id turpis. Nam eu mollis sem. Aenean in hendrerit neque. Morbi rhoncus lacinia risus ac mattis. Pellentesque a mauris sapien. Nunc sit amet accumsan massa. Nulla gravida porttitor luctus. Aliquam fringilla at quam non euismod. Phasellus eu gravida eros. Cras odio risus, blandit non suscipit sed, volutpat vitae nulla. In ultrices at leo sit amet interdum.</p>
+                            <p class="ref grey-text no-margin">Ref. {{ offer.reference }}</p>
+                            <h2>{{ offer.title }}</h2>
+                            <p>{{ offer.description }}</p>
                         </div>
 
                         <div class="col-xs-12 col-md-4 quick-overview">
                             <ul class="portfolio-meta">
-                                <li><span> Pulished at </span>24 May 18</li>
-                                <li><span> Position </span>2nd Engineer</li>
-                                <li><span> Contract Type </span>Full Time</li>
-                                <li><span> Salary </span>45k &euro;</li>
-                                <li><span> Location </span>Paris</li>
-                                <li><span> Starting date </span>2018-05-18</li>
+                                <li><span> Pulished at </span>{{ offer.createdAt|date("d-m-Y") }}</li>
+                                <li><span> Position </span>{{ offer.title }}</li>
+                                <li><span> Contract Type </span>{{ offer.type }}</li>
+                                <li><span> Salary </span>{{ offer.salary }}k &euro;</li>
+                                <li><span> Location </span>{{ offer.location }}</li>
+                                <li><span> Starting date </span>{{ offer.closeAt|date("d-m-Y") }}</li>
                             </ul>
                             <a class="btn btn-block gradient primary mt-30 waves-effect waves-light" href="#!">Apply for this job</a>
                             <div class="btn btn-block btn-success mt-30 waves-effect waves-light disabled">You have applied for this job</div>
@@ -85,9 +92,15 @@
 
                         <div class="col-xs-6 col-sm-6 col-md-4">
                             <div class="previous-post-link">
-                                <a class="btn border primary waves-effect waves-dark" href="#!">
+                                {% if (offer.id == 1) %}
+                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': offers|length}) }}">
                                     <i class="fa fa-long-arrow-left"></i>Previous
                                 </a>
+                                {% else %}
+                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': offer.id - 1}) }}">
+                                    <i class="fa fa-long-arrow-left"></i>Previous
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="hidden-xs hidden-sm col-md-4"></div>
@@ -95,9 +108,15 @@
 
                         <div class="col-xs-6 col-sm-6 col-md-4">
                             <div class="next-post-link">
-                                <a class="btn border primary waves-effect waves-dark" href="#!">
+                                {% if (offer.id == offers|length) %}
+                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': 1}) }}">
                                     Next <i class="fa fa-long-arrow-right"></i>
                                 </a>
+                                {% else %}
+                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': offer.id + 1}) }}">
+                                    Next <i class="fa fa-long-arrow-right"></i>
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
 

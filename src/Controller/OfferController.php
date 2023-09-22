@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
+use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,18 +11,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class OfferController extends AbstractController
 {
     #[Route('/offer', name: 'app_offer')]
-    public function offer(): Response
+    public function offer(OfferRepository $offerRepository): Response
     {
+        $offers = $offerRepository->findAll();
+
         return $this->render('offer/index.html.twig', [
-            'controller_name' => 'OfferController',
+            'offers' => $offers
         ]);
     }
 
-    #[Route('/offer/show', name: 'app_offer_show')]
-    public function index(): Response
+    #[Route('/offer/{id}', name: 'app_offer_show')]
+    public function show(Offer $offer, OfferRepository $offerRepository): Response
     {
+        $offers = $offerRepository->findAll(); 
+
+
         return $this->render('offer/show.html.twig', [
-            'controller_name' => 'OfferController',
+            'offer' => $offer,
+            'offers' => $offers
         ]);
     }
 }

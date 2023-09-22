@@ -21,6 +21,32 @@ class OfferRepository extends ServiceEntityRepository
         parent::__construct($registry, Offer::class);
     }
 
+    /**
+    * @return Offer[] Returns an array of Offer objects
+    */
+    public function findTenAll(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+    * @return Offer[] Returns an array of Offer objects
+    */
+    public function findTenByCreatedAt(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->orderBy('o.createdAt', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 //    /**
 //     * @return Offer[] Returns an array of Offer objects
 //     */

@@ -34,10 +34,10 @@ class Client
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_client', targetEntity: Offer::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Offer::class, orphanRemoval: true)]
     private Collection $offers;
 
     public function __construct()
@@ -146,7 +146,7 @@ class Client
     {
         if (!$this->offers->contains($offer)) {
             $this->offers->add($offer);
-            $offer->setIdClient($this);
+            $offer->setClient($this);
         }
 
         return $this;
@@ -156,11 +156,12 @@ class Client
     {
         if ($this->offers->removeElement($offer)) {
             // set the owning side to null (unless already changed)
-            if ($offer->getIdClient() === $this) {
-                $offer->setIdClient(null);
+            if ($offer->getClient() === $this) {
+                $offer->setClient(null);
             }
         }
 
         return $this;
     }
+
 }

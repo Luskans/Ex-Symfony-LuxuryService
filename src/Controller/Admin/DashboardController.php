@@ -2,7 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Candidate;
+use App\Entity\Client;
+use App\Entity\Offer;
 use App\Entity\Product;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -41,6 +45,17 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Produits', 'fas fa-list', Product::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('Candidates', 'fas fa-list', Candidate::class);
+        yield MenuItem::linkToCrud('Clients', 'fas fa-list', Client::class);
+        yield MenuItem::linkToCrud('Offers', 'fas fa-list', Offer::class);
+        yield MenuItem::section('Back');
+        yield MenuItem::linkToRoute('Home', 'fa fa-home', 'app_home');
     }
+
+    // public function configureFields(string $pageName): iterable
+    // {
+    //    <p>hello</p>
+
+    // }
 }
