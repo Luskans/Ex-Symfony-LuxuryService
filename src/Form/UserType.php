@@ -27,29 +27,29 @@ class UserType extends AbstractType
                 'label' => 'Email'
             ])
             // ->add('roles')
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'mapped' => false,
-                'options' => [
-                    'attr' => [
-                        // 'class' => 'password-field',
-                        // 'autocomplete' => 'new-password',
-                        // 'required' => false,
-                        // 'data-parsley-trigger' => 'change',
-                        // 'data-parsley-minlength' => '6',
-                        // 'data-parsley-error-message' => 'The password must be at least 6 characters.'
-                    ],  
-                ],
-                'first_options'  => [
-                    'label' => 'Change your password here',
-                    'label_attr' => [
-                        'required' => false,
-                        'class' => 'test',
-                    ],
-                    'attr' => [
-                        'required' => false,
-                        // 'id' => 'password',
-                    ],
+            // ->add('password', RepeatedType::class, [
+            //     'type' => PasswordType::class,
+            //     'mapped' => false,
+            //     'options' => [
+            //         'attr' => [
+            //             // 'class' => 'password-field',
+            //             // 'autocomplete' => 'new-password',
+            //             // 'required' => false,
+            //             // 'data-parsley-trigger' => 'change',
+            //             // 'data-parsley-minlength' => '6',
+            //             // 'data-parsley-error-message' => 'The password must be at least 6 characters.'
+            //         ],  
+            //     ],
+                // 'first_options'  => [
+                //     'label' => 'Change your password here',
+                //     'label_attr' => [
+                //         'required' => false,
+                //         'class' => 'test',
+                //     ],
+                //     'attr' => [
+                //         'required' => false,
+                //         'id' => 'password',
+                //     ],
                     // 'constraints' => [
                     //     new NotBlank([
                     //         'message' => 'Please enter a password',
@@ -61,16 +61,16 @@ class UserType extends AbstractType
                     //         'max' => 4096,
                     //     ]),
                     // ],
-                ],
-                'second_options' => [
-                    'label' => 'Confirm your new password',
-                    'attr' => [
-                        'required' => false,
-                        // 'id' => 'password_repeat',
-                    ],
-                    // 'invalid_message' => 'The password fields must match.',
-                ],
-            ])
+            //     ],
+            //     'second_options' => [
+            //         'label' => 'Confirm your new password',
+            //         'attr' => [
+            //             'required' => false,
+            //             // 'id' => 'password_repeat',
+            //         ],
+            //         // 'invalid_message' => 'The password fields must match.',
+            //     ],
+            // ])
             // ->add('candidate')
         ;
     }

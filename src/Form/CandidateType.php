@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -69,9 +70,24 @@ class CandidateType extends AbstractType
                 'label' => 'Nationality'
             ])
             // ->add('havePassport')
-            // ->add('passport')
-            // ->add('curriculum')
-            // ->add('picture')
+            ->add('passport', FileType::class, [
+                'required' => false,
+                'attr' => [
+                    
+                ],
+            ])
+            ->add('curriculum', FileType::class, [
+                'required' => false,
+                'attr' => [
+                    
+                ],
+            ])
+            ->add('picture', FileType::class, [
+                'required' => false,
+                'attr' => [
+                    
+                ],
+            ])
             ->add('dateOfBirth', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [

@@ -97,6 +97,12 @@ class Candidate
         $this->candidacies = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        $completeName = $this->getFirstname() . ' ' . $this->getLastname();
+        return $completeName;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

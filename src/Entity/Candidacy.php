@@ -24,6 +24,11 @@ class Candidacy
     #[ORM\JoinColumn(nullable: false)]
     private ?Offer $offer = null;
 
+    public function __toString(): string
+    {
+        return $this->getId() . ' : ' . $this->getCandidate()->getFirstname() . ' ' . $this->getCandidate()->getLastname() . ' -> ' . $this->getOffer()->getReference() . ' - ' . $this->getOffer()->getTitle();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

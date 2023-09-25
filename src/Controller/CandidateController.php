@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/candidate')]
@@ -57,18 +58,53 @@ class CandidateController extends AbstractController
     {
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
+        $rootDir = $this->getParameter('kernel.project_dir');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $candidate->setUpdatedAt(new DateTimeImmutable());
+      
+            // On change le nom et met le fichier passport dans les uploads
+            $directory1 = $rootDir . '/public/assets/img/uploads/passports';
+            $passport = $form['passport']->getData();
+            $extension1 = $passport->guessExtension();
+            if (!$extension1) {
+                $extension1 = 'bin';
+            }
+            $passport->move($directory1, uniqid('', true) . '.' . $extension1);
 
-            // $user->setPassword(
-            //     $userPasswordHasher->hashPassword(
-            //         $user,
-            //         $form->get('password')->getData()
-            //     )
-            // );
+            // On change le nom et met le fichier curriculum dans les uploads
+            $directory2 = $rootDir . '/public/assets/img/uploads/cv';
+            $curriculum = $form['curriculum']->getData();
+            $extension2 = $curriculum->guessExtension();
+            if (!$extension2) {
+                $extension2 = 'bin';
+            }
+            $curriculum->move($directory2, uniqid('', true) . '.' . $extension2);
 
+            // On change le nom et met le fichier picture dans les uploads
+            $directory3 = $rootDir . '/public/assets/img/uploads/pictures';
+            $picture = $form['picture']->getData();
+            $extension3 = $picture->guessExtension();
+            if (!$extension3) {
+                $extension3 = 'bin';
+            }
+            $picture->move($directory3, uniqid('', true) . '.' . $extension3);
 
+            // On change le nom et met le fichier file dans les uploads
+            // $directory4 = __DIR__ . '/public/assets/img/uploads/files';
+            // $file = $form['file']->getData();
+            // $extension4 = $file->guessExtension();
+            // if (!$extension4) {
+            //     $extension4 = 'bin';
+            // }
+            // $file->move($directory4, uniqid('', true) . '.' . $extension4);
+
+            // On met une valeur à passport si havePassport n'est pas vide
+            if ($candidate->getPassport()) {
+                $candidate->setHavePassport(true);
+            } else {
+                $candidate->setHavePassport(false);
+            }
 
             $entityManager->flush();
 
