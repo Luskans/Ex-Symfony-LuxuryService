@@ -89,8 +89,11 @@ class Candidate
     #[ORM\Column]
     private ?bool $isDeleted = false;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Candidacy::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Candidacy::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $candidacies;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $percentCompleted = null;
 
     public function __construct()
     {
@@ -425,5 +428,34 @@ class Candidate
 
         return $this;
     }
-    
+
+    // fonction custom pour voir si tous les champs sont remplis
+    public function areFieldsCompleted(): bool
+    {
+        $reflectionClass = new \ReflectionClass($this);
+        $fields = $reflectionClass->getProperties();
+
+        foreach ($fields as $field) {
+            $field->setAccessible(true);
+            $value = $field->getValue($this);
+
+            if (empty($value) && !is_bool($value)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function getPercentCompleted(): ?int
+    {
+        return $this->percentCompleted;
+    }
+
+    public function setPercentCompleted(?int $percentCompleted): static
+    {
+        $this->percentCompleted = $percentCompleted;
+
+        return $this;
+    } 
 }

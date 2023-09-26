@@ -69,20 +69,22 @@ class CandidateType extends AbstractType
                 ],
                 'label' => 'Nationality'
             ])
-            // ->add('havePassport')
             ->add('passport', FileType::class, [
+                'mapped' => false, // permet de ne pas hydrater l'entité
                 'required' => false,
                 'attr' => [
                     
                 ],
             ])
             ->add('curriculum', FileType::class, [
+                'mapped' => false,
                 'required' => false,
                 'attr' => [
                     
                 ],
             ])
             ->add('picture', FileType::class, [
+                'mapped' => false,
                 'required' => false,
                 'attr' => [
                     
@@ -163,12 +165,6 @@ class CandidateType extends AbstractType
                 ],
             ])
             ->add('user', UserType::class)
-            // ->add('note')
-            // ->add('createdAt')
-            // ->add('updatedAt')
-            // ->add('deletedAt')
-            // ->add('file')
-            // ->add('user')
         ;
     }
 

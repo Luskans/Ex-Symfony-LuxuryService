@@ -38,6 +38,7 @@ class RegistrationController extends AbstractController
             $user->setCandidate(new Candidate());
             $user->getCandidate()->setUser($user);
             $user->getCandidate()->setCreatedAt(new DateTimeImmutable());
+            $user->getCandidate()->setPercentCompleted(0);
 
             $entityManager->persist($user);
             $entityManager->flush();

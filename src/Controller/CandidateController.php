@@ -63,48 +63,55 @@ class CandidateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $candidate->setUpdatedAt(new DateTimeImmutable());
       
-            // On change le nom et met le fichier passport dans les uploads
+            // On change le nom et met le fichier picture dans les uploads
             $directory1 = $rootDir . '/public/assets/img/uploads/passports';
             $passport = $form['passport']->getData();
-            $extension1 = $passport->guessExtension();
-            if (!$extension1) {
-                $extension1 = 'bin';
+            if ($passport) {
+                $extension1 = $passport->guessExtension();
+                if (!$extension1) {
+                    $extension1 = 'bin';
+                }
+                $passportName = uniqid('', true) . '.' . $extension1;
+                $passport->move($directory1, $passportName);
+                $candidate->setPassport($passportName);
             }
-            $passport->move($directory1, uniqid('', true) . '.' . $extension1);
 
-            // On change le nom et met le fichier curriculum dans les uploads
-            $directory2 = $rootDir . '/public/assets/img/uploads/cv';
+            // On change le nom et met le fichier picture dans les uploads
+            $directory2 = $rootDir . '/public/assets/img/uploads/curriculum';
             $curriculum = $form['curriculum']->getData();
-            $extension2 = $curriculum->guessExtension();
-            if (!$extension2) {
-                $extension2 = 'bin';
+            if ($curriculum) {
+                $extension2 = $curriculum->guessExtension();
+                if (!$extension2) {
+                    $extension2 = 'bin';
+                }
+                $curriculumName = uniqid('', true) . '.' . $extension2;
+                $curriculum->move($directory2, $curriculumName);
+                $candidate->setPicture($curriculumName);
             }
-            $curriculum->move($directory2, uniqid('', true) . '.' . $extension2);
 
             // On change le nom et met le fichier picture dans les uploads
             $directory3 = $rootDir . '/public/assets/img/uploads/pictures';
             $picture = $form['picture']->getData();
-            $extension3 = $picture->guessExtension();
-            if (!$extension3) {
-                $extension3 = 'bin';
+            if ($picture) {
+                $extension3 = $picture->guessExtension();
+                if (!$extension3) {
+                    $extension3 = 'bin';
+                }
+                $pictureName = uniqid('', true) . '.' . $extension3;
+                $picture->move($directory3, $pictureName);
+                $candidate->setPicture($pictureName);
             }
-            $picture->move($directory3, uniqid('', true) . '.' . $extension3);
 
-            // On change le nom et met le fichier file dans les uploads
-            // $directory4 = __DIR__ . '/public/assets/img/uploads/files';
-            // $file = $form['file']->getData();
-            // $extension4 = $file->guessExtension();
-            // if (!$extension4) {
-            //     $extension4 = 'bin';
-            // }
-            // $file->move($directory4, uniqid('', true) . '.' . $extension4);
-
-            // On met une valeur à passport si havePassport n'est pas vide
+            // Si on recoit un passport, on change le havePassport
             if ($candidate->getPassport()) {
                 $candidate->setHavePassport(true);
             } else {
                 $candidate->setHavePassport(false);
             }
+
+            // On vérifie les champs pour augmenter le percentCompleted
+            $totalProperties = 16;
+            
 
             $entityManager->flush();
 

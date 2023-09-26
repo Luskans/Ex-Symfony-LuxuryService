@@ -53,7 +53,7 @@ class Offer
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
 
-    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Candidacy::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Candidacy::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $candidacies;
 
     public function __construct()
