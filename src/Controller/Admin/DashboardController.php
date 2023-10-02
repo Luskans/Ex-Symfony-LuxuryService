@@ -22,7 +22,7 @@ class DashboardController extends AbstractDashboardController
         $this->setEntityManager($entityManagerInterface);
     }
 
-    #[Route('/admin', name: 'admin', methods: ['GET'])]
+    #[Route('/admin', name: 'admin', methods: ['GET', 'POST'])]
     public function index(): Response
     {
         $candidateRepository = $this->entityManager->getRepository(Candidate::class);
@@ -67,6 +67,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa-solid fa-info-circle');
+        yield MenuItem::section();
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Candidates', 'fa-solid fa-pen', Candidate::class);
         yield MenuItem::linkToCrud('Clients', 'fa-solid fa-building', Client::class);

@@ -14,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\DomCrawler\Field\FileFormField;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CandidateCrudController extends AbstractCrudController
 {
@@ -24,13 +26,16 @@ class CandidateCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $rootDir = $this->getParameter('kernel.project_dir');
         return [
             IdField::new('id')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnForm(),
             // TextField::new('gender'),
             TextField::new('firstname'),
             TextField::new('lastname'),
-            AssociationField::new('user'),
+            AssociationField::new('user')
+                ->setLabel('Email'),
             TextField::new('city'),
             TextField::new('adress')
                 ->hideOnIndex(),
@@ -42,10 +47,28 @@ class CandidateCrudController extends AbstractCrudController
                 ->hideOnIndex(),
             TextField::new('passport')
                 ->hideOnIndex(),
+            ImageField::new('passport')
+                ->setBasePath('/public/assets/img/uploads/passports/')
+                ->setUploadDir('/public/assets/img/uploads/passports')
+                ->setUploadedFileNamePattern(
+                    fn (UploadedFile $file): string => sprintf(uniqid('', true) . '.' . $file->guessExtension())
+                ),
             TextField::new('curriculum')
                 ->hideOnIndex(),
-            // ImageField::new('picture')
-            //     ->hideOnIndex(),
+            ImageField::new('curriculum')
+                ->setBasePath('/public/assets/img/uploads/curriculum/')
+                ->setUploadDir('/public/assets/img/uploads/curriculum')
+                ->setUploadedFileNamePattern(
+                    fn (UploadedFile $file): string => sprintf(uniqid('', true) . '.' . $file->guessExtension())
+                ),
+            TextField::new('picture')
+                ->hideOnIndex(),
+            ImageField::new('picture')
+                ->setBasePath('/public/assets/img/uploads/pictures/')
+                ->setUploadDir('/public/assets/img/uploads/pictures')
+                ->setUploadedFileNamePattern(
+                    fn (UploadedFile $file): string => sprintf(uniqid('', true) . '.' . $file->guessExtension())
+                ),
             DateField::new('dateOfBirth')
                 ->hideOnIndex(),
             TextField::new('placeOfBirth')
@@ -57,13 +80,22 @@ class CandidateCrudController extends AbstractCrudController
                 ->hideOnIndex(),
             TextEditorField::new('note')
                 ->hideOnIndex(),
-            DateField::new('createdAt'),
+            DateField::new('createdAt')
+                ->hideOnForm(),
             DateField::new('updatedAt')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnForm(),
             DateField::new('deletedAt')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnForm(),
             TextField::new('file')
                 ->hideOnIndex(),
+            ImageField::new('file')
+            ->setBasePath('/public/assets/img/uploads/files/')
+                ->setUploadDir('/public/assets/img/uploads/files')
+                ->setUploadedFileNamePattern(
+                    fn (UploadedFile $file): string => sprintf(uniqid('', true) . '.' . $file->guessExtension())
+                ),
             BooleanField::new('isAvailable'),
             BooleanField::new('isDeleted')
                 ->hideOnIndex(),

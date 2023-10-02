@@ -60,7 +60,7 @@ class Client
         return $this->company;
     }
 
-    public function setCompany(string $company): static
+    public function setCompany(?string $company): static
     {
         $this->company = $company;
 
@@ -72,7 +72,7 @@ class Client
         return $this->sector;
     }
 
-    public function setSector(string $sector): static
+    public function setSector(?string $sector): static
     {
         $this->sector = $sector;
 
@@ -84,7 +84,7 @@ class Client
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -96,7 +96,7 @@ class Client
         return $this->position;
     }
 
-    public function setPosition(string $position): static
+    public function setPosition(?string $position): static
     {
         $this->position = $position;
 
@@ -108,7 +108,7 @@ class Client
         return $this->phone;
     }
 
-    public function setPhone(int $phone): static
+    public function setPhone(?int $phone): static
     {
         $this->phone = $phone;
 
@@ -120,7 +120,7 @@ class Client
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
 
@@ -132,7 +132,7 @@ class Client
         return $this->notes;
     }
 
-    public function setNotes(string $notes): static
+    public function setNotes(?string $notes): static
     {
         $this->notes = $notes;
 

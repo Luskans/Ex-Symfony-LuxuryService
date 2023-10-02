@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Uid\Uuid;
 
 #[Route('/candidate')]
 class CandidateController extends AbstractController
@@ -71,7 +72,8 @@ class CandidateController extends AbstractController
                 if (!$extension1) {
                     $extension1 = 'bin';
                 }
-                $passportName = uniqid('', true) . '.' . $extension1;
+                $uuid1 = Uuid::v7();
+                $passportName = $uuid1 . '.' . $extension1;
                 $passport->move($directory1, $passportName);
                 $candidate->setPassport($passportName);
             }
@@ -84,9 +86,10 @@ class CandidateController extends AbstractController
                 if (!$extension2) {
                     $extension2 = 'bin';
                 }
-                $curriculumName = uniqid('', true) . '.' . $extension2;
+                $uuid2 = Uuid::v7();
+                $curriculumName = $uuid2 . '.' . $extension2;
                 $curriculum->move($directory2, $curriculumName);
-                $candidate->setPicture($curriculumName);
+                $candidate->setCurriculum($curriculumName);
             }
 
             // On change le nom et met le fichier picture dans les uploads
@@ -97,7 +100,8 @@ class CandidateController extends AbstractController
                 if (!$extension3) {
                     $extension3 = 'bin';
                 }
-                $pictureName = uniqid('', true) . '.' . $extension3;
+                $uuid3= Uuid::v7();
+                $pictureName = $uuid3 . '.' . $extension3;
                 $picture->move($directory3, $pictureName);
                 $candidate->setPicture($pictureName);
             }
@@ -110,7 +114,7 @@ class CandidateController extends AbstractController
             }
 
             // On vérifie les champs pour augmenter le percentCompleted
-            $totalProperties = 16;
+            $candidate->setPercentCompleted($candidate->checkPercentCompleted());
             
 
             $entityManager->flush();

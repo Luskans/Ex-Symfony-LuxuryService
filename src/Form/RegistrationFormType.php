@@ -71,20 +71,20 @@ class RegistrationFormType extends AbstractType
                     // 'invalid_message' => 'The password fields must match.',
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-                'attr' => [
-                    'value' => '1',
-                    'id' => 'agreeTerms',
-                    'required' => true,
-                ],
-                // 'label' => 'I have read and I accept the <a href="#!" target="_blank">Terms Of Use</a>',
-            ])
+            // ->add('agreeTerms', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'constraints' => [
+            //         new IsTrue([
+            //             'message' => 'You should agree to our terms.',
+            //         ]),
+            //     ],
+            //     'attr' => [
+            //         'value' => '1',
+            //         'id' => 'agreeTerms',
+            //         'required' => true,
+            //     ],
+            //     // 'label' => 'I have read and I accept the <a href="#!" target="_blank">Terms Of Use</a>',
+            // ])
         ;
     }
 

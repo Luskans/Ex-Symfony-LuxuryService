@@ -21,23 +21,35 @@
 
     <section class="d-flex flex-column align-items-center gap-5">
         <div class="d-flex gap-5">
-            <div class="stat border rounded d-flex gap-2 align-items-center justify-content-center" style="width: 200px; height: 200px">
-                <p class="fs-1">{{ candidates|length }}</p>
-                <i class="fa-solid fa-pen"></i>
+            <div class="stat border rounded d-flex flex-column align-items-center justify-content-center" style="width: 200px; height: 200px">
+                <div class="d-flex align-items-center justify-content-center  gap-2">
+                    <p class="fs-1">{{ candidates|length }}</p>
+                    <i class="fa-solid fa-pen"></i>
+                </div>
+                <p class="fs-2">Candidates</p>
             </div>
-            <div class="stat border rounded d-flex gap-2 align-items-center justify-content-center" style="width: 200px; height: 200px">
-                <p class="fs-1">{{ clients|length }}</p>
-                <i class="fa-solid fa-building"></i>
+            <div class="stat border rounded d-flex flex-column align-items-center justify-content-center" style="width: 200px; height: 200px">
+                <div class="d-flex align-items-center justify-content-center  gap-2">
+                    <p class="fs-1">{{ clients|length }}</p>
+                    <i class="fa-solid fa-building"></i>
+                </div>
+                <p class="fs-2">Clients</p>
             </div>
         </div>
         <div class="d-flex gap-5">
-            <div class="stat border rounded d-flex gap-2 align-items-center justify-content-center" style="width: 200px; height: 200px">
-                <p class="fs-1">{{ candidacies|length }}</p>
-                <i class="fa-solid fa-check-to-slot"></i>
+            <div class="stat border rounded d-flex flex-column align-items-center justify-content-center" style="width: 200px; height: 200px">
+                <div class="d-flex align-items-center justify-content-center  gap-2">
+                    <p class="fs-1">{{ candidacies|length }}</p>
+                    <i class="fa-solid fa-check-to-slot"></i>
+                </div>
+                <p class="fs-2">Candidacies</p>
             </div>
-            <div class="stat border rounded d-flex gap-2 align-items-center justify-content-center" style="width: 200px; height: 200px">
-                <p class="fs-1">{{ offers|length }}</p>
-                <i class="fa-solid fa-file-contract"></i>
+            <div class="stat border rounded d-flex flex-column align-items-center justify-content-center" style="width: 200px; height: 200px">
+                <div class="d-flex align-items-center justify-content-center  gap-2">
+                    <p class="fs-1">{{ offers|length }}</p>
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
+                <p class="fs-2">Offers</p>
             </div>
         </div>
     </section>

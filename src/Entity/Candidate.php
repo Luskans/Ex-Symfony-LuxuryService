@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -98,6 +99,7 @@ class Candidate
     public function __construct()
     {
         $this->candidacies = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function __toString(): string
@@ -116,7 +118,7 @@ class Candidate
         return $this->gender;
     }
 
-    public function setGender(string $gender): static
+    public function setGender(?string $gender): static
     {
         $this->gender = $gender;
 
@@ -128,7 +130,7 @@ class Candidate
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): static
+    public function setFirstname(?string $firstname): static
     {
         $this->firstname = $firstname;
 
@@ -140,7 +142,7 @@ class Candidate
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): static
+    public function setLastname(?string $lastname): static
     {
         $this->lastname = $lastname;
 
@@ -164,7 +166,7 @@ class Candidate
         return $this->adress;
     }
 
-    public function setAdress(string $adress): static
+    public function setAdress(?string $adress): static
     {
         $this->adress = $adress;
 
@@ -176,7 +178,7 @@ class Candidate
         return $this->country;
     }
 
-    public function setCountry(string $country): static
+    public function setCountry(?string $country): static
     {
         $this->country = $country;
 
@@ -188,7 +190,7 @@ class Candidate
         return $this->nationality;
     }
 
-    public function setNationality(string $nationality): static
+    public function setNationality(?string $nationality): static
     {
         $this->nationality = $nationality;
 
@@ -200,7 +202,7 @@ class Candidate
         return $this->havePassport;
     }
 
-    public function setHavePassport(bool $havePassport): static
+    public function setHavePassport(?bool $havePassport): static
     {
         $this->havePassport = $havePassport;
 
@@ -212,7 +214,7 @@ class Candidate
         return $this->passport;
     }
 
-    public function setPassport(string $passport): static
+    public function setPassport(?string $passport): static
     {
         $this->passport = $passport;
 
@@ -224,7 +226,7 @@ class Candidate
         return $this->curriculum;
     }
 
-    public function setCurriculum(string $curriculum): static
+    public function setCurriculum(?string $curriculum): static
     {
         $this->curriculum = $curriculum;
 
@@ -236,7 +238,7 @@ class Candidate
         return $this->picture;
     }
 
-    public function setPicture(string $picture): static
+    public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
 
@@ -248,7 +250,7 @@ class Candidate
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): static
+    public function setDateOfBirth(?\DateTimeInterface $dateOfBirth): static
     {
         $this->dateOfBirth = $dateOfBirth;
 
@@ -260,7 +262,7 @@ class Candidate
         return $this->placeOfBirth;
     }
 
-    public function setPlaceOfBirth(string $placeOfBirth): static
+    public function setPlaceOfBirth(?string $placeOfBirth): static
     {
         $this->placeOfBirth = $placeOfBirth;
 
@@ -272,7 +274,7 @@ class Candidate
         return $this->isAvailable;
     }
 
-    public function setIsAvailable(bool $isAvailable): static
+    public function setIsAvailable(?bool $isAvailable): static
     {
         $this->isAvailable = $isAvailable;
 
@@ -284,7 +286,7 @@ class Candidate
         return $this->sector;
     }
 
-    public function setSector(string $sector): static
+    public function setSector(?string $sector): static
     {
         $this->sector = $sector;
 
@@ -296,7 +298,7 @@ class Candidate
         return $this->experience;
     }
 
-    public function setExperience(string $experience): static
+    public function setExperience(?string $experience): static
     {
         $this->experience = $experience;
 
@@ -308,7 +310,7 @@ class Candidate
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -320,7 +322,7 @@ class Candidate
         return $this->note;
     }
 
-    public function setNote(string $note): static
+    public function setNote(?string $note): static
     {
         $this->note = $note;
 
@@ -332,7 +334,7 @@ class Candidate
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -344,7 +346,7 @@ class Candidate
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
@@ -356,7 +358,7 @@ class Candidate
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTimeImmutable $deletedAt): static
+    public function setDeletedAt(?\DateTimeImmutable $deletedAt): static
     {
         $this->deletedAt = $deletedAt;
 
@@ -368,7 +370,7 @@ class Candidate
         return $this->file;
     }
 
-    public function setFile(string $file): static
+    public function setFile(?string $file): static
     {
         $this->file = $file;
 
@@ -392,7 +394,7 @@ class Candidate
         return $this->isDeleted;
     }
 
-    public function setIsDeleted(bool $isDeleted): static
+    public function setIsDeleted(?bool $isDeleted): static
     {
         $this->isDeleted = $isDeleted;
 
@@ -429,24 +431,6 @@ class Candidate
         return $this;
     }
 
-    // fonction custom pour voir si tous les champs sont remplis
-    public function areFieldsCompleted(): bool
-    {
-        $reflectionClass = new \ReflectionClass($this);
-        $fields = $reflectionClass->getProperties();
-
-        foreach ($fields as $field) {
-            $field->setAccessible(true);
-            $value = $field->getValue($this);
-
-            if (empty($value) && !is_bool($value)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public function getPercentCompleted(): ?int
     {
         return $this->percentCompleted;
@@ -458,4 +442,93 @@ class Candidate
 
         return $this;
     } 
+
+    // // fonction custom pour voir si tous les champs sont remplis
+    // public function areFieldsCompleted(): bool
+    // {
+    //     $reflectionClass = new \ReflectionClass($this);
+    //     $fields = $reflectionClass->getProperties();
+
+    //     foreach ($fields as $field) {
+    //         $field->setAccessible(true);
+    //         $value = $field->getValue($this);
+
+    //         if (empty($value) && !is_bool($value)) {
+    //             return false;
+    //         }
+    //     }
+
+    //     return true;
+    // }
+
+    // custom function
+    public function checkPercentCompleted(): int
+    {
+        $totalFields = 15;
+        $percentPart = 100/15; //6.66
+        $actualPercent = 0;
+        $reflectionClass = new \ReflectionClass($this);
+
+        $genderValue = $reflectionClass->getProperty('gender')->getValue($this);
+        if (!empty($genderValue) && !is_bool($genderValue)) {
+            $actualPercent += $percentPart;
+        }
+        $firstnameValue = $reflectionClass->getProperty('firstname')->getValue($this);
+        if (!empty($firstnameValue) && !is_bool($firstnameValue)) {
+            $actualPercent += $percentPart;
+        }
+        $lastnameValue = $reflectionClass->getProperty('lastname')->getValue($this);
+        if (!empty($lastnameValue) && !is_bool($lastnameValue)) {
+            $actualPercent += $percentPart;
+        }
+        $cityValue = $reflectionClass->getProperty('city')->getValue($this);
+        if (!empty($cityValue) && !is_bool($cityValue)) {
+            $actualPercent += $percentPart;
+        }
+        $adressValue = $reflectionClass->getProperty('adress')->getValue($this);
+        if (!empty($adressValue) && !is_bool($adressValue)) {
+            $actualPercent += $percentPart;
+        }
+        $countryValue = $reflectionClass->getProperty('country')->getValue($this);
+        if (!empty($countryValue) && !is_bool($countryValue)) {
+            $actualPercent += $percentPart;
+        }
+        $nationalityValue = $reflectionClass->getProperty('nationality')->getValue($this);
+        if (!empty($nationalityValue) && !is_bool($nationalityValue)) {
+            $actualPercent += $percentPart;
+        }
+        $passportValue = $reflectionClass->getProperty('passport')->getValue($this);
+        if (!empty($passportValue) && !is_bool($passportValue)) {
+            $actualPercent += $percentPart;
+        }
+        $curriculumValue = $reflectionClass->getProperty('curriculum')->getValue($this);
+        if (!empty($curriculumValue) && !is_bool($curriculumValue)) {
+            $actualPercent += $percentPart;
+        }
+        $pictureValue = $reflectionClass->getProperty('picture')->getValue($this);
+        if (!empty($pictureValue) && !is_bool($pictureValue)) {
+            $actualPercent += $percentPart;
+        }
+        $dateOfBirthValue = $reflectionClass->getProperty('dateOfBirth')->getValue($this);
+        if (!empty($dateOfBirthValue) && !is_bool($dateOfBirthValue)) {
+            $actualPercent += $percentPart;
+        }
+        $placeOfBirthValue = $reflectionClass->getProperty('placeOfBirth')->getValue($this);
+        if (!empty($placeOfBirthValue) && !is_bool($placeOfBirthValue)) {
+            $actualPercent += $percentPart;
+        }
+        $sectorValue = $reflectionClass->getProperty('sector')->getValue($this);
+        if (!empty($sectorValue) && !is_bool($sectorValue)) {
+            $actualPercent += $percentPart;
+        }
+        $experienceValue = $reflectionClass->getProperty('experience')->getValue($this);
+        if (!empty($experienceValue) && !is_bool($experienceValue)) {
+            $actualPercent += $percentPart;
+        }
+        $descriptionValue = $reflectionClass->getProperty('description')->getValue($this);
+        if (!empty($descriptionValue) && !is_bool($descriptionValue)) {
+            $actualPercent += $percentPart;
+        }
+        return round($actualPercent);
+    }
 }

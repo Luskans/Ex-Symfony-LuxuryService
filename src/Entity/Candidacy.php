@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CandidacyRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CandidacyRepository::class)]
@@ -24,6 +25,11 @@ class Candidacy
     #[ORM\JoinColumn(nullable: false)]
     private ?Offer $offer = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
+
     public function __toString(): string
     {
         return $this->getId() . ' : ' . $this->getCandidate()->getFirstname() . ' ' . $this->getCandidate()->getLastname() . ' -> ' . $this->getOffer()->getReference() . ' - ' . $this->getOffer()->getTitle();
@@ -39,7 +45,7 @@ class Candidacy
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 

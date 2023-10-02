@@ -104,8 +104,9 @@
             <div class="container">
                 <div class="row">
                     <div class="score-container">
+                    {% if (candidate.percentCompleted == 100) %}
                         <h4>
-                            <img src="https://i.imgur.com/s9bPVaK.gif" style="height: 80px; width: 201px;"> &nbsp;
+                            <img src="{{ asset('assets/img/hooray.gif') }}" style="height: 80px; width: 201px;"> &nbsp;
                             &nbsp; Hooray ! Your profile is complete.
                         </h4>
                         <div class="c100 p100 small complete ">
@@ -115,6 +116,18 @@
                                 <div class="fill"></div>
                             </div>
                         </div>
+                    {% else %}
+                        <h4>
+                            &nbsp; Complete 100% of your profile to apply for offers !
+                        </h4>
+                        <div class="c100 p100 small complete ">
+                            <span>{{ candidate.percentCompleted }}%</span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                    {% endif %}
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -165,12 +178,15 @@
                                     {{ form_widget(candidateForm.picture) }}
                                 </div>
 
+                                {% if (candidate.picture) %}
                                 <div class="existing-file">
-                                    <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> profil_picture.jpg</a>
+                                    <a href="{{ asset('assets/img/uploads/pictures/') }}{{ candidate.picture }}" target="_blank"><i class="material-icons">&#xE24D;</i> your picture</a>
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
                                 </div>
+                                {% else %}
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-8">
@@ -209,12 +225,16 @@
                                         {# <input id="passport" size="20000000" accept=".pdf,.jpg,.doc,.docx,.png,.gif" name="passport" type="file"> #}
                                         {{ form_widget(candidateForm.passport) }}
                                     </div>
+
+                                    {% if (candidate.passport) %}
                                     <div class="existing-file">
-                                        <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> passeport.jpg</a>
+                                        <a href="{{ asset('assets/img/uploads/passports/') }}{{ candidate.passport }}" target="_blank"><i class="material-icons">&#xE24D;</i> your passport</a>
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text" placeholder="Upload your passport" readonly>
                                     </div>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
 
                                 <div class="file-field input-field">
@@ -224,12 +244,15 @@
                                         {{ form_widget(candidateForm.curriculum) }}
                                     </div>
 
+                                    {% if (candidate.curriculum) %}
                                     <div class="existing-file">
-                                        <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> CV.pdf</a>
+                                        <a href="{{ asset('assets/img/uploads/curriculum/') }}{{ candidate.curriculum }}" target="_blank"><i class="material-icons">&#xE24D;</i> your CV</a>
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text" placeholder="Upload your Curriculum Vitae" readonly>
                                     </div>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
 
                             </div>

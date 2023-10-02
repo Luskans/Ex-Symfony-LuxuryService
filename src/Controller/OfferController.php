@@ -28,11 +28,13 @@ class OfferController extends AbstractController
     #[Route('/offer/{id}', name: 'app_offer_show')]
     public function show(Offer $offer, OfferRepository $offerRepository): Response
     {
-        $offers = $offerRepository->findAll(); 
+        $offers = $offerRepository->findAll();
+        $candidacyError = 0;
 
         return $this->render('offer/show.html.twig', [
             'offer' => $offer,
-            'offers' => $offers
+            'offers' => $offers,
+            'candidacyError' => $candidacyError
         ]);
     }
 
@@ -67,39 +69,68 @@ class OfferController extends AbstractController
 
         if ($this->getUser()) {
 
-            if ($this->getUser()->getCandidate()) {
-                $candidacies = $this->getUser()->getCandidate()->getCandidacies();
-                $candidacyExist = false;
+            if ($this->getUser()->getCandidate()->getPercentCompleted() == 100) {
 
-                foreach ($candidacies as $candidacy) {
+                if  ($this->getUser()->getCandidate()->isIsAvailable()) {
 
-                    if ($candidacy->getOffer()->getId() === $offer->getId()) {
-                        $candidacyExist = true;
-                        break;
+                    $candidacies = $this->getUser()->getCandidate()->getCandidacies();
+                    $candidacyExist = false;
+                    $candidacyError = 0;
+
+                    foreach ($candidacies as $candidacy) {
+
+                        if ($candidacy->getOffer()->getId() === $offer->getId()) {
+                            $candidacyExist = true;
+                            break;
+                        }
                     }
-                }
 
-                if ($candidacyExist) {
-                    dd("salut");
+                    if ($candidacyExist) {
+                        $candidacyError = 1;
+                        // dd("offre deja candidatée");
+                        return $this->render('offer/show.html.twig', [
+                            'offer' => $offer,
+                            'offers' => $offers,
+                            'candidacyError' => $candidacyError
+                        ]);
+
+                    } else {
+                        $candidacyError == 0;
+                        $newCandidacy = new Candidacy();
+                        dd($candidacy);
+                        $this->getUser()->getCandidate()->addCandidacy($newCandidacy);
+                        $offer->addCandidacy($newCandidacy);
+                        $newCandidacy->setCandidate($this->getUser()->getCandidate());
+                        $newCandidacy->setOffer($offer);
+                        $newCandidacy->setCreatedAt(new DateTimeImmutable());
+
+                        $entityManager->flush();
+
+                        return $this->render('offer/show.html.twig', [
+                            'offer' => $offer,
+                            'offers' => $offers,
+                            'candidacyError' => $candidacyError
+                        ]);
+                    }
 
                 } else {
-                    $newCandidacy = new Candidacy();
-                    $this->getUser()->getCandidate()->addCandidacy($newCandidacy);
-                    $offer->addCandidacy($newCandidacy);
-                    $newCandidacy->setCandidate($this->getUser()->getCandidate());
-                    $newCandidacy->setOffer($offer);
-                    $newCandidacy->setCreatedAt(new DateTimeImmutable());
-
-                    $entityManager->flush();
-
+                    $candidacyError = 2;
+                    // dd('vous devez metre votre profil en available');
                     return $this->render('offer/show.html.twig', [
                         'offer' => $offer,
-                        'offers' => $offers
+                        'offers' => $offers,
+                        'candidacyError' => $candidacyError
                     ]);
                 }
 
             } else {
-                dd("profil candidat non complet");
+                $candidacyError = 3;
+                // dd("profil candidat non complet");
+                return $this->render('offer/show.html.twig', [
+                    'offer' => $offer,
+                    'offers' => $offers,
+                    'candidacyError' => $candidacyError
+                ]);
             }
 
         } else {

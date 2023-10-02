@@ -81,8 +81,24 @@
                                 <li><span> Location </span>{{ offer.location }}</li>
                                 <li><span> Starting date </span>{{ offer.closeAt|date("d-m-Y") }}</li>
                             </ul>
-                            <a class="btn btn-block gradient primary mt-30 waves-effect waves-light" href="#!">Apply for this job</a>
-                            <div class="btn btn-block btn-success mt-30 waves-effect waves-light disabled">You have applied for this job</div>
+                            {% if candidacyError == 0 %}
+                                {% if offer.checkAlreadyCandidated(app.user.candidate) %}
+                                    <a class="btn btn-block gradient primary mt-30 waves-effect waves-light disabled" href="#">Apply for this job</a>
+                                    <div class="btn btn-block btn-success mt-30 waves-effect waves-light disabled">You have applied for this job</div>
+                                {% else %}
+                                    <a class="btn btn-block gradient primary mt-30 waves-effect waves-light" href="{{ path('app_offer_add', {'id': offer.id}) }}">Apply for this job</a>
+                                {% endif %}
+                            {% elseif candidacyError == 1 %}
+                                <a class="btn btn-block gradient primary mt-30 waves-effect waves-light disabled" href="#">Apply for this job</a>
+                                <div class="btn btn-block btn-success mt-30 waves-effect waves-light disabled">You have applied for this job</div>
+                                <p class="text-danger">You have already applied for this job.</p>
+                            {% elseif candidacyError == 2 %}
+                                <a class="btn btn-block gradient primary mt-30 waves-effect waves-light disabled" href="#">Apply for this job</a>
+                                <p class="text-danger">You must check that you are available in your profile to apply for this job.</p>
+                            {% elseif candidacyError == 3 %}
+                                <a class="btn btn-block gradient primary mt-30 waves-effect waves-light disabled" href="#">Apply for this job</a>
+                                <p class="text-danger">You must complete 100% of your profile to apply for this job.</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

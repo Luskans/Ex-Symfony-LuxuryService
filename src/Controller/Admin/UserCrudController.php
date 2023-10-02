@@ -24,10 +24,11 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnForm(),
             EmailField::new('email'),
             ArrayField::new('roles'),
-            AssociationField::new('candidate')
+            ArrayField::new('candidate')
         ];
     }
 }

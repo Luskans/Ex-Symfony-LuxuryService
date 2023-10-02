@@ -46,24 +46,28 @@ class CandidateType extends AbstractType
                 'label' => 'Last name'
             ])
             ->add('city', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'id' => 'current_location',
                 ],
                 'label' => 'Current Location'
             ])
             ->add('adress', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'id' => 'address',
                 ],
                 'label' => 'Address'
             ])
             ->add('country', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'id' => 'country',
                 ],
                 'label' => 'Country'
             ])
             ->add('nationality', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'id' => 'nationality',
                 ],
@@ -73,24 +77,37 @@ class CandidateType extends AbstractType
                 'mapped' => false, // permet de ne pas hydrater l'entité
                 'required' => false,
                 'attr' => [
-                    
-                ],
+                    'id' => 'passport',
+                    'size' => '20000000',
+                    'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
+                    'name' => 'passport',
+                    'type' => 'file'
+                ]
             ])
             ->add('curriculum', FileType::class, [
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    
-                ],
+                    'id' => 'cv',
+                    'size' => '20000000',
+                    'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
+                    'name' => 'cv',
+                    'type' => 'file'
+                ]
             ])
             ->add('picture', FileType::class, [
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    
-                ],
+                    'id' => 'photo',
+                    'size' => '20000000',
+                    'accept' => '.pdf,.jpg,.doc,.docx,.png,.gif',
+                    'name' => 'photo',
+                    'type' => 'file'
+                ]
             ])
             ->add('dateOfBirth', DateType::class, [
+                'required' => false,
                 'widget' => 'single_text',
                 'attr' => [
                     'id' => 'birth_date',
@@ -102,12 +119,14 @@ class CandidateType extends AbstractType
                 ],
             ])
             ->add('placeOfBirth', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'id' => 'birth_place',
                 ],
                 'label' => 'Birthplace'
             ])
             ->add('sector', ChoiceType::class, [
+                'required' => false,
                 'choices' => [
                     'Commercial' => 'commercial',
                     'Retail sales' => 'retail sales',
@@ -126,6 +145,7 @@ class CandidateType extends AbstractType
                 ],
             ])
             ->add('experience', ChoiceType::class, [
+                'required' => false,
                 'choices' => [
                     '0 - 6 month' => '0 - 6 month',
                     '6 month - 1 year' => '6 month - 1 year',
@@ -143,6 +163,7 @@ class CandidateType extends AbstractType
                 ],
             ])
             ->add('description', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'id' => 'description',
                     'class' => 'materialize-textarea',

@@ -21,7 +21,8 @@ class ClientCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnForm(),
             TextField::new('company'),
             TextField::new('sector')
                 ->hideOnIndex(),

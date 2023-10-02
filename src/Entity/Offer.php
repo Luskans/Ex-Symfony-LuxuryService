@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -59,6 +60,7 @@ class Offer
     public function __construct()
     {
         $this->candidacies = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function __toString(): string
@@ -76,7 +78,7 @@ class Offer
         return $this->reference;
     }
 
-    public function setReference(string $reference): static
+    public function setReference(?string $reference): static
     {
         $this->reference = $reference;
 
@@ -88,7 +90,7 @@ class Offer
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -100,7 +102,7 @@ class Offer
         return $this->isActivate;
     }
 
-    public function setIsActivate(bool $isActivate): static
+    public function setIsActivate(?bool $isActivate): static
     {
         $this->isActivate = $isActivate;
 
@@ -112,7 +114,7 @@ class Offer
         return $this->notes;
     }
 
-    public function setNotes(string $notes): static
+    public function setNotes(?string $notes): static
     {
         $this->notes = $notes;
 
@@ -124,7 +126,7 @@ class Offer
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
 
@@ -136,7 +138,7 @@ class Offer
         return $this->type;
     }
 
-    public function setType(string $type): static
+    public function setType(?string $type): static
     {
         $this->type = $type;
 
@@ -148,7 +150,7 @@ class Offer
         return $this->location;
     }
 
-    public function setLocation(string $location): static
+    public function setLocation(?string $location): static
     {
         $this->location = $location;
 
@@ -160,7 +162,7 @@ class Offer
         return $this->sector;
     }
 
-    public function setSector(string $sector): static
+    public function setSector(?string $sector): static
     {
         $this->sector = $sector;
 
@@ -172,7 +174,7 @@ class Offer
         return $this->closeAt;
     }
 
-    public function setCloseAt(\DateTimeInterface $closeAt): static
+    public function setCloseAt(?\DateTimeInterface $closeAt): static
     {
         $this->closeAt = $closeAt;
 
@@ -184,7 +186,7 @@ class Offer
         return $this->salary;
     }
 
-    public function setSalary(int $salary): static
+    public function setSalary(?int $salary): static
     {
         $this->salary = $salary;
 
@@ -196,7 +198,7 @@ class Offer
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -245,5 +247,19 @@ class Offer
         return $this;
     }
 
+    // custom function to check if the offer have already a candidaty with the current candidate
+    public function checkAlreadyCandidated(Candidate $candidate): bool
+    {
+        $alreadyCandidated = false;
+        if ($this->getCandidacies() != null) {
+            foreach ($this->getCandidacies() as $candidacy) {
+                if ($candidacy->getCandidate() == $candidate) {
+                    $alreadyCandidated = true;
+                    break;
+                }
+            }
+        }
+        return $alreadyCandidated;
+    }
 
 }
