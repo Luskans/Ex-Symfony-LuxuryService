@@ -299,17 +299,28 @@
                     <ul class="portfolio-filter brand-filter text-center">
                         <li class="active waves-effect waves-light" data-group="all">All</li>
                         <li class=" waves-effect waves-light" data-group="commercial">Commercial</li>
-                        <li class=" waves-effect waves-light" data-group="retail">Retail sales</li>
+                        <li class=" waves-effect waves-light" data-group="retail sales">Retail sales</li>
                         <li class=" waves-effect waves-light" data-group="creative">Creative</li>
                         <li class=" waves-effect waves-light" data-group="technology">Technology</li>
                         <li class=" waves-effect waves-light" data-group="marketing">Marketing & PR</li>
-                        <li class=" waves-effect waves-light" data-group="fashion">Fashion & luxury</li>
-                        <li class=" waves-effect waves-light" data-group="management">Management & HR</li>
+                        <li class=" waves-effect waves-light" data-group="fashion & luxury">Fashion & luxury</li>
+                        <li class=" waves-effect waves-light" data-group="management & hr">Management & HR</li>
                     </ul>
+                    {# <ul class="portfolio-filter brand-filter text-center">
+                        <a href="{{ path('app_offer_sector', {'sector': 'all'}) }}"><li class="active waves-effect waves-light" data-group="all">All</li></a>
+                        <a href="{{ path('app_offer_sector', {'sector': 'commercial'}) }}"><li class=" waves-effect waves-light" data-group="commercial">Commercial</li></a>
+                        <a href="{{ path('app_offer_sector', {'sector': 'retail sales'}) }}"><li class=" waves-effect waves-light" data-group="retail">Retail sales</li></a>
+                        <a href="{{ path('app_offer_sector', {'sector': 'creative'}) }}"><li class=" waves-effect waves-light" data-group="creative">Creative</li></a>
+                        <a href="{{ path('app_offer_sector', {'sector': 'technology'}) }}"><li class=" waves-effect waves-light" data-group="technology">Technology</li></a>
+                        <a href="{{ path('app_offer_sector', {'sector': 'marketing & pr'}) }}"><li class=" waves-effect waves-light" data-group="marketing">Marketing & PR</li></a>
+                        <a href="{{ path('app_offer_sector', {'sector': 'fashion & luxury'}) }}"><li class=" waves-effect waves-light" data-group="fashion">Fashion & luxury</li></a>
+                        <a href="{{ path('app_offer_sector', {'sector': 'management & hr'}) }}"><li class=" waves-effect waves-light" data-group="management">Management & HR</li></a>
+                    </ul> #}
                     <div class="portfolio portfolio-with-title col-2 gutter mt-30">
 
                     {% for offer in offers %}
-                        <div class="portfolio-item" data-groups='["all", "commercial"]'>
+                        {# <div class="portfolio-item" data-groups='["all", "commercial"]'> #}
+                        <div class="portfolio-item" data-groups='["all", "{{ offer.sector }}"]'>
                             <div class="portfolio-wrapper">
                                 <div class="card job-card">
                                     <div class="card-content">
@@ -319,7 +330,7 @@
                                         </span>
                                         <div class="metas mb-20">
                                             <div class="meta">
-                                                <i class="material-icons">&#xE53E;</i>{{ offer.salary }}k&euro;
+                                                <i class="material-icons">&#xE53E;</i>{{ (offer.salary / 1000)|number_format(1) }}k&euro;
                                             </div>
                                             <div class="meta">
                                                 <i class="material-icons">&#xE916;</i>{{ offer.closeAt|date("d-m-Y") }}

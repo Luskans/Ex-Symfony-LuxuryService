@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
+use App\Entity\User;
 use App\Form\CandidateType;
 use App\Repository\CandidateRepository;
 use DateTime;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 
@@ -55,11 +57,15 @@ class CandidateController extends AbstractController
     // }
 
     #[Route('/{id}/edit', name: 'app_candidate_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Candidate $candidate, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Candidate $candidate, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
         $rootDir = $this->getParameter('kernel.project_dir');
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $candidate->setUpdatedAt(new DateTimeImmutable());
@@ -113,9 +119,16 @@ class CandidateController extends AbstractController
                 $candidate->setHavePassport(false);
             }
 
-            // On vérifie les champs pour augmenter le percentCompleted
+            // On vérifie les champs pour modifier le percentCompleted
             $candidate->setPercentCompleted($candidate->checkPercentCompleted());
             
+            // On modifie le password user
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('user')->get('password')->getData()
+                )
+            );
 
             $entityManager->flush();
 

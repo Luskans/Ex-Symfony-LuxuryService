@@ -23,18 +23,50 @@ class OfferController extends AbstractController
         return $this->render('offer/index.html.twig', [
             'offers' => $offers
         ]);
+        
     }
+
+    // #[Route('/offer/{sector}', name: 'app_offer_sector')]
+    // public function sector(string $sector, OfferRepository $offerRepository): Response
+    // {
+    //     if ($sector == 'all') {
+    //         $offers = $offerRepository->findAll();
+    //     } elseif ($sector == 'commercial') {
+    //         $offers = $offerRepository->findTenBySector('commercial');
+    //     } elseif ($sector == 'retail sales') {
+    //         $offers = $offerRepository->findTenBySector('retail sales');
+    //     } elseif ($sector == 'creative') {
+    //         $offers = $offerRepository->findTenBySector('creative');
+    //     } elseif ($sector == 'technology') {
+    //         $offers = $offerRepository->findTenBySector('technology');
+    //     } elseif ($sector == 'marketing & pr') {
+    //         $offers = $offerRepository->findTenBySector('marketing & pr');
+    //     } elseif ($sector == 'fashion & luxury') {
+    //         $offers = $offerRepository->findTenBySector('fashion & luxury');
+    //     } elseif ($sector == 'management & hr') {
+    //         $offers = $offerRepository->findTenBySector('management & hr');
+    //     }
+
+    //     return $this->render('offer/index.html.twig', [
+    //         'offers' => $offers
+    //     ]);
+    // }
+
 
     #[Route('/offer/{id}', name: 'app_offer_show')]
     public function show(Offer $offer, OfferRepository $offerRepository): Response
     {
         $offers = $offerRepository->findAll();
         $candidacyError = 0;
+        $previousOffer = $offerRepository->findPreviousOffer($offer);
+        $nextOffer = $offerRepository->findNextOffer($offer);
 
         return $this->render('offer/show.html.twig', [
             'offer' => $offer,
             'offers' => $offers,
-            'candidacyError' => $candidacyError
+            'candidacyError' => $candidacyError,
+            'previousOffer' => $previousOffer,
+            'nextOffer' => $nextOffer
         ]);
     }
 
@@ -42,38 +74,18 @@ class OfferController extends AbstractController
     public function add(Offer $offer, OfferRepository $offerRepository, EntityManagerInterface $entityManager): Response
     {
         $offers = $offerRepository->findAll();
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
 
-        // if ($this->getUser()) {
-        //     $candidacy = new Candidacy();
-        //     $this->getUser()->getCandidate()->addCandidacy($candidacy);
-        //     $offer->addCandidacy($candidacy);
-        //     $candidacy->setCandidate($this->getUser()->getCandidate());
-        //     $candidacy->setOffer($offer);
-        //     $candidacy->setCreatedAt(new DateTimeImmutable());
+        if ($user) {
 
-        //     $entityManager->flush();
+            if ($user->getCandidate()->getPercentCompleted() == 100) {
 
-        //     return $this->render('offer/show.html.twig', [
-        //         'offer' => $offer,
-        //         'offers' => $offers
-        //     ]);
+                if  ($user->getCandidate()->isIsAvailable()) {
 
-        // } else {
-        //     return $this->redirectToRoute('app_login');
-        // }
-
-        // return $this->render('offer/show.html.twig', [
-        //     'offer' => $offer,
-        //     'offers' => $offers
-        // ]);
-
-        if ($this->getUser()) {
-
-            if ($this->getUser()->getCandidate()->getPercentCompleted() == 100) {
-
-                if  ($this->getUser()->getCandidate()->isIsAvailable()) {
-
-                    $candidacies = $this->getUser()->getCandidate()->getCandidacies();
+                    $candidacies = $user->getCandidate()->getCandidacies();
                     $candidacyExist = false;
                     $candidacyError = 0;
 
@@ -85,22 +97,20 @@ class OfferController extends AbstractController
                         }
                     }
 
-                    if ($candidacyExist) {
+                    if ($candidacyExist) { // if offer already candidated
                         $candidacyError = 1;
-                        // dd("offre deja candidatée");
                         return $this->render('offer/show.html.twig', [
                             'offer' => $offer,
                             'offers' => $offers,
                             'candidacyError' => $candidacyError
                         ]);
 
-                    } else {
+                    } else { // if everything is ok
                         $candidacyError == 0;
                         $newCandidacy = new Candidacy();
-                        dd($candidacy);
-                        $this->getUser()->getCandidate()->addCandidacy($newCandidacy);
+                        $user->getCandidate()->addCandidacy($newCandidacy);
                         $offer->addCandidacy($newCandidacy);
-                        $newCandidacy->setCandidate($this->getUser()->getCandidate());
+                        $newCandidacy->setCandidate($user->getCandidate());
                         $newCandidacy->setOffer($offer);
                         $newCandidacy->setCreatedAt(new DateTimeImmutable());
 
@@ -113,9 +123,8 @@ class OfferController extends AbstractController
                         ]);
                     }
 
-                } else {
+                } else { // if isAvailable is on 'no'
                     $candidacyError = 2;
-                    // dd('vous devez metre votre profil en available');
                     return $this->render('offer/show.html.twig', [
                         'offer' => $offer,
                         'offers' => $offers,
@@ -123,9 +132,8 @@ class OfferController extends AbstractController
                     ]);
                 }
 
-            } else {
+            } else { // if candidate profil uncompleted
                 $candidacyError = 3;
-                // dd("profil candidat non complet");
                 return $this->render('offer/show.html.twig', [
                     'offer' => $offer,
                     'offers' => $offers,
@@ -133,7 +141,7 @@ class OfferController extends AbstractController
                 ]);
             }
 
-        } else {
+        } else { // if no user
             return $this->redirectToRoute('app_login');
         }
     }

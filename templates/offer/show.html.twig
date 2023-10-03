@@ -42,16 +42,12 @@
                         <ol class="breadcrumb">
                             <li>
                                 <div class="portfolio-nav">
-                                    {% if (offer.id == 1) %}
-                                    <a href="#" class="waves-effect waves-dark"><i class="fa fa-angle-left" aria-hidden="true"></i> Prev</a>
-                                    {% else %}
-                                    <a href="{{ path('app_offer_show', {'id': offer.id - 1}) }}" class="waves-effect waves-dark"><i class="fa fa-angle-left" aria-hidden="true"></i> Prev</a>
+                                    {% if previousOffer is not null %}
+                                        <a href="{{ path('app_offer_show', {'id': previousOffer.id}) }}" class="waves-effect waves-dark"><i class="fa fa-angle-left" aria-hidden="true"></i> Prev</a>
                                     {% endif %}
-                                    <a href="{{ path('app_offer') }}" class="waves-effect waves-dark"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-                                    {% if (offer.id == offers|length) %}
-                                    <a href="#" class="waves-effect waves-dark">Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                    {% else %}
-                                    <a href="{{ path('app_offer_show', {'id': offer.id + 1}) }}" class="waves-effect waves-dark">Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                        <a href="{{ path('app_offer') }}" class="waves-effect waves-dark"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                                    {% if nextOffer is not null %}
+                                        <a href="{{ path('app_offer_show', {'id': nextOffer.id}) }}" class="waves-effect waves-dark">Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                                     {% endif %}
                                 </div>
                             </li>
@@ -77,7 +73,7 @@
                                 <li><span> Pulished at </span>{{ offer.createdAt|date("d-m-Y") }}</li>
                                 <li><span> Position </span>{{ offer.title }}</li>
                                 <li><span> Contract Type </span>{{ offer.type }}</li>
-                                <li><span> Salary </span>{{ offer.salary }}k &euro;</li>
+                                <li><span> Salary </span>{{ offer.salary }} &euro;</li>
                                 <li><span> Location </span>{{ offer.location }}</li>
                                 <li><span> Starting date </span>{{ offer.closeAt|date("d-m-Y") }}</li>
                             </ul>
@@ -104,38 +100,27 @@
                 </div>
 
                 <nav class="single-post-navigation no-margin" role="navigation">
-                    <div class="row">
-
+                    <div class="row">     
                         <div class="col-xs-6 col-sm-6 col-md-4">
                             <div class="previous-post-link">
-                                {% if (offer.id == 1) %}
-                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': offers|length}) }}">
+                            {% if previousOffer is not null %}
+                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': previousOffer.id }) }}">
                                     <i class="fa fa-long-arrow-left"></i>Previous
                                 </a>
-                                {% else %}
-                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': offer.id - 1}) }}">
-                                    <i class="fa fa-long-arrow-left"></i>Previous
-                                </a>
-                                {% endif %}
+                            {% endif %}
                             </div>
                         </div>
                         <div class="hidden-xs hidden-sm col-md-4"></div>
-
-
+                        
                         <div class="col-xs-6 col-sm-6 col-md-4">
                             <div class="next-post-link">
-                                {% if (offer.id == offers|length) %}
-                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': 1}) }}">
+                            {% if nextOffer is not null %}
+                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': nextOffer.id }) }}">
                                     Next <i class="fa fa-long-arrow-right"></i>
                                 </a>
-                                {% else %}
-                                <a class="btn border primary waves-effect waves-dark" href="{{ path('app_offer_show', {'id': offer.id + 1}) }}">
-                                    Next <i class="fa fa-long-arrow-right"></i>
-                                </a>
-                                {% endif %}
+                            {% endif %}
                             </div>
                         </div>
-
                     </div>
                 </nav>
             </div>
