@@ -443,24 +443,6 @@ class Candidate
         return $this;
     } 
 
-    // // fonction custom pour voir si tous les champs sont remplis
-    // public function areFieldsCompleted(): bool
-    // {
-    //     $reflectionClass = new \ReflectionClass($this);
-    //     $fields = $reflectionClass->getProperties();
-
-    //     foreach ($fields as $field) {
-    //         $field->setAccessible(true);
-    //         $value = $field->getValue($this);
-
-    //         if (empty($value) && !is_bool($value)) {
-    //             return false;
-    //         }
-    //     }
-
-    //     return true;
-    // }
-
     // custom function
     public function checkPercentCompleted(): int
     {

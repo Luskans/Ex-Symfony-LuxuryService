@@ -62,7 +62,8 @@ class CandidateCrudController extends AbstractCrudController
                 ->setUploadDir('/public/assets/img/uploads/passports')
                 ->setUploadedFileNamePattern(
                     fn (UploadedFile $file): string => sprintf(uniqid('', true) . '.' . $file->guessExtension())
-                ),
+                )
+                ->hideOnIndex(),
             // TextField::new('curriculum')
             //     ->hideOnIndex(),
             ImageField::new('curriculum')
@@ -70,7 +71,8 @@ class CandidateCrudController extends AbstractCrudController
                 ->setUploadDir('/public/assets/img/uploads/curriculum')
                 ->setUploadedFileNamePattern(
                     fn (UploadedFile $file): string => sprintf(uniqid('', true) . '.' . $file->guessExtension())
-                ),
+                )
+                ->hideOnIndex(),
             // TextField::new('picture')
             //     ->hideOnIndex(),
             ImageField::new('picture')
@@ -78,7 +80,8 @@ class CandidateCrudController extends AbstractCrudController
                 ->setUploadDir('/public/assets/img/uploads/pictures')
                 ->setUploadedFileNamePattern(
                     fn (UploadedFile $file): string => sprintf(uniqid('', true) . '.' . $file->guessExtension())
-                ),
+                )
+                ->hideOnIndex(),
             DateField::new('dateOfBirth')
                 ->hideOnIndex(),
             TextField::new('placeOfBirth')
