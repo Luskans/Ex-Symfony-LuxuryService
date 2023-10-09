@@ -32,7 +32,7 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('password-field')->getData()
+                    $form->get('password')->getData()
                 )
             );
             $user->setCandidate(new Candidate());
